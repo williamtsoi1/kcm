@@ -8,7 +8,7 @@ spec:
       revisionTemplate:
         spec:
           container:
-            image: gcr.io/knative-samples/kcm:0.1.1
+            image: gcr.io/knative-samples/kcm:0.1.2
             env:
             - name: TEXT_PATH
               # in this case, tweet text field
