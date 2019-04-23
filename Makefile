@@ -17,12 +17,12 @@ mod:
 pimage: mod
 	gcloud builds submit \
 		--project ${GCP_PROJECT} \
-		--tag gcr.io/${GCP_PROJECT}/kcm:0.1.1
+		--tag gcr.io/${GCP_PROJECT}/kcm:0.1.2
 
 image: mod
 	gcloud builds submit \
 		--project knative-samples \
-		--tag gcr.io/knative-samples/kcm:0.1.1
+		--tag gcr.io/knative-samples/kcm:0.1.2
 
 # DEPLOYMENT
 

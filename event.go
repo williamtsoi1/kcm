@@ -72,7 +72,7 @@ func (r *eventReceiver) Receive(ctx context.Context, event ce.Event, resp *ce.Ev
 	resp = &ce.EventResponse{
 		Status:  200,
 		Event:   &event,
-		Reason:  "Stored",
+		Reason:  "Scored",
 		Context: ctx,
 	}
 
