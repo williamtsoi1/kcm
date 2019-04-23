@@ -14,15 +14,15 @@ mod:
 	go mod tidy
 	go mod vendor
 
-image: mod
+pimage: mod
 	gcloud builds submit \
 		--project ${GCP_PROJECT} \
-		--tag gcr.io/${GCP_PROJECT}/myevents:0.1.3
+		--tag gcr.io/${GCP_PROJECT}/kcm:0.1.1
 
-sample-image: mod
+image: mod
 	gcloud builds submit \
 		--project knative-samples \
-		--tag gcr.io/knative-samples/myevents:0.1.3
+		--tag gcr.io/knative-samples/kcm:0.1.1
 
 # DEPLOYMENT
 
