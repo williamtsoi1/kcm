@@ -47,7 +47,7 @@ Context Attributes,
   contenttype: application/json
 Data,
   {
-    "text": "RT @PostGradProblem: In preparation for the NFL lockout, I will be spending twice as much time analyzing my fantasy baseball team during ...",
+    "text": "In preparation for NFL lockout, I will be spending twice as much time analyzing my fantasy baseball team",
     ...
   }
 ```
@@ -66,7 +66,7 @@ Extensions,
   sentiment: map[magnitude:0.2 score:0.2]
 Data,
   {
-    "text": "RT @PostGradProblem: In preparation for the NFL lockout, I will be spending twice as much time analyzing my fantasy baseball team during ...",
+    "text": "In preparation for NFL lockout, I will be spending twice as much time analyzing my fantasy baseball team",
     ...
   }
 ```

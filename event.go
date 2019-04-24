@@ -32,7 +32,7 @@ func (r *eventReceiver) Receive(ctx context.Context, event ce.Event, resp *ce.Ev
 			log.Printf("Failed to DataAs bytes: %s", err.Error())
 			return err
 		}
-		textValue = gjson.GetBytes(content, textPath).Raw
+		textValue = gjson.GetBytes(content, textPath).String()
 	} else {
 		return fmt.Errorf("Invalid Data Content Type: %s. Only application/json and text/plain supported",
 			event.DataContentType())
