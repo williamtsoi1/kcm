@@ -8,8 +8,8 @@ spec:
       revisionTemplate:
         spec:
           container:
-            image: gcr.io/knative-samples/kcm:0.1.2
+            image: gcr.io/knative-samples/kcm:0.1.3
             env:
             - name: TEXT_PATH
-              # in this case, tweet text field
+              # https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object
               value: "text"
