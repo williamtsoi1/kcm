@@ -1,6 +1,6 @@
 # kcm
 
-Simple Knative service that scores Cloud Events content sentiment. The posted events have have either `text/plain` or `application/json` content type.
+Simple Knative service that scores the sentiment of Cloud Events content. The posted event has to have either `text/plain` or `application/json` content type.
 
 ## Prerequisites
 
@@ -11,7 +11,7 @@ Simple Knative service that scores Cloud Events content sentiment. The posted ev
 
 ## Deployment
 
-If the posted event is a `JSON` structure, you must provide `TEXT_PATH` env var holding the full x-path of the text that will be scored. To score the content of Tweet for example you would pass `test`. You can edit it in the `service.json` file.
+If the posted event is a `JSON` structure, you must provide `TEXT_PATH` env var holding the full x-path of the text that will be scored. To score the content of Tweet for example you would pass `text`. You can edit it in the `service.yaml` file.
 
 To deploy this service, simply apply it using `kubectl`
 
