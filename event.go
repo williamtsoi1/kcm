@@ -27,7 +27,7 @@ type eventReceiver struct{}
 
 func (r *eventReceiver) Receive(ctx context.Context, event ce.Event, resp *ce.EventResponse) error {
 
-	log.Printf("Raw Event: %v", event)
+	//log.Printf("Raw Event: %v", event)
 
 	// get content
 	var textValue string
@@ -81,7 +81,7 @@ func (r *eventReceiver) Receive(ctx context.Context, event ce.Event, resp *ce.Ev
 		return nil
 	}
 
-	log.Printf("Processed Event: %v", event)
+	log.Printf("Classified event: %v", event.Context)
 
 	resp = &ce.EventResponse{
 		Status:  200,
