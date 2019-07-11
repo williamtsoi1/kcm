@@ -82,13 +82,7 @@ func (r *eventReceiver) Receive(ctx context.Context, event ce.Event, resp *ce.Ev
 	}
 
 	log.Printf("Classified event: %v", event.Context)
-
-	resp = &ce.EventResponse{
-		Status:  200,
-		Event:   &event,
-		Reason:  "Scored",
-		Context: ctx,
-	}
+	resp.RespondWith(200, &event)
 
 	return nil
 
