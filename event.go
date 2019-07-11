@@ -11,7 +11,7 @@ import (
 )
 
 var (
-	textPath = mustGetEnv("TEXT_PATH", "")
+	textPath = mustGetEnv("TEXT_PATH", "text")
 
 	// Magnitude indicates the overall strength of emotion
 	// (both positive and negative) between 0.0 and +inf.
