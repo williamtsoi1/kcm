@@ -11,8 +11,8 @@ mod:
 
 image: mod
 	gcloud builds submit \
-		--project cloudylabs-public \
-		--tag gcr.io/cloudylabs-public/sentiment-classifier:0.3.3
+      --project cloudylabs-public \
+	  --tag gcr.io/cloudylabs-public/sentiment-classifier:0.3.4
 
 # DEPLOYMENT
 service:
