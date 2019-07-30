@@ -4,18 +4,14 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"os"
-	"strconv"
 
 	ce "github.com/cloudevents/sdk-go"
+	ev "github.com/mchmarny/gcputil/env"
 )
 
 func main() {
 
-	port, err := strconv.Atoi(mustGetEnv("PORT", "8080"))
-	if err != nil {
-		log.Fatalf("failed to parse port, %s", err.Error())
-	}
+	port := ev.MustGetIntEnvVar("PORT", 8080)
 
 	// Handler Mux
 	mux := http.NewServeMux()
@@ -51,16 +47,4 @@ func main() {
 	a := fmt.Sprintf(":%d", port)
 	log.Fatal(http.ListenAndServe(a, mux))
 
-}
-
-func mustGetEnv(key, fallbackValue string) string {
-	if val, ok := os.LookupEnv(key); ok {
-		return val
-	}
-
-	if fallbackValue == "" {
-		log.Fatalf("Required env var (%s) not set", key)
-	}
-
-	return fallbackValue
 }

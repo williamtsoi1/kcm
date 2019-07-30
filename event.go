@@ -4,14 +4,14 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"strconv"
 
 	ce "github.com/cloudevents/sdk-go"
+	ev "github.com/mchmarny/gcputil/env"
 	"github.com/tidwall/gjson"
 )
 
 var (
-	textPath = mustGetEnv("TEXT_PATH", "text")
+	textPath = ev.MustGetEnvVar("TEXT_PATH", "text")
 )
 
 type eventReceiver struct{}
@@ -82,12 +82,4 @@ func (r *eventReceiver) Receive(ctx context.Context, event ce.Event, resp *ce.Ev
 
 	return nil
 
-}
-
-func toFloat(s string) float32 {
-	f, e := strconv.ParseFloat(s, 32)
-	if e != nil {
-		log.Fatalf("Value not a float (%s)", s)
-	}
-	return float32(f)
 }
