@@ -59,7 +59,9 @@ func (r *eventReceiver) Receive(ctx context.Context, event ce.Event, resp *ce.Ev
 	m, s, e := scoreSentiment(ctx, textValue)
 	if e != nil {
 		log.Printf("Failed on score sentiment: %s", e.Error())
-		return e
+		event.SetType(fmt.Sprintf("%s.noneng", event.Type()))
+		resp.RespondWith(200, &event)
+		return nil
 	}
 	log.Printf("Score: %f Magnitude: %f (min %f))", s, m, minMagnitude)
 
