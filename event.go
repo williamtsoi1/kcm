@@ -31,21 +31,28 @@ func (r *eventReceiver) Receive(ctx context.Context, event ce.Event, resp *ce.Ev
 
 	// get content
 	var textValue string
-	if event.DataContentType() == "text/plain" {
-		if err := event.DataAs(textValue); err != nil {
-			log.Printf("Failed to DataAs string: %s", err.Error())
-			return err
+
+	// check tranlated ext
+	err := event.Context.ExtensionAs("translation", &textValue)
+	log.Printf("Parsing translation ext: %v", err)
+
+	if err != nil || textValue == "" {
+		if event.DataContentType() == "text/plain" {
+			if err := event.DataAs(textValue); err != nil {
+				log.Printf("Failed to DataAs string: %s", err.Error())
+				return err
+			}
+		} else if event.DataContentType() == "application/json" {
+			content, err := event.DataBytes()
+			if err != nil {
+				log.Printf("Failed to DataAs bytes: %s", err.Error())
+				return err
+			}
+			textValue = gjson.GetBytes(content, textPath).String()
+		} else {
+			return fmt.Errorf("Invalid Data Content Type: %s. Only application/json and text/plain supported",
+				event.DataContentType())
 		}
-	} else if event.DataContentType() == "application/json" {
-		content, err := event.DataBytes()
-		if err != nil {
-			log.Printf("Failed to DataAs bytes: %s", err.Error())
-			return err
-		}
-		textValue = gjson.GetBytes(content, textPath).String()
-	} else {
-		return fmt.Errorf("Invalid Data Content Type: %s. Only application/json and text/plain supported",
-			event.DataContentType())
 	}
 
 	log.Printf("Text to score: %s", textValue)
