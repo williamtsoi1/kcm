@@ -1,18 +1,20 @@
 package cloudevents
 
 import (
+	"context"
 	"encoding/base64"
 	"errors"
 	"fmt"
-	"github.com/cloudevents/sdk-go/pkg/cloudevents/datacodec"
 	"strconv"
+
+	"github.com/cloudevents/sdk-go/pkg/cloudevents/datacodec"
 )
 
 // Data is special. Break it out into it's own file.
 
 // SetData implements EventWriter.SetData
 func (e *Event) SetData(obj interface{}) error {
-	data, err := datacodec.Encode(e.DataMediaType(), obj)
+	data, err := datacodec.Encode(context.Background(), e.DataMediaType(), obj)
 	if err != nil {
 		return err
 	}
@@ -39,7 +41,8 @@ func (e *Event) DataBytes() ([]byte, error) {
 		if s, ok := e.Data.(string); ok {
 			b = []byte(s)
 		} else {
-			return nil, errors.New("data was not a byte slice or string")
+			// No data.
+			return []byte(nil), nil
 		}
 	}
 	return b, nil
@@ -64,7 +67,7 @@ func (e Event) DataAs(data interface{}) error { // TODO: Clean this function up
 		}
 	}
 	if len(obj) == 0 {
-		// no data.
+		// No data.
 		return nil
 	}
 	if e.Context.GetDataContentEncoding() == Base64 {
@@ -92,5 +95,5 @@ func (e Event) DataAs(data interface{}) error { // TODO: Clean this function up
 	if err != nil {
 		return err
 	}
-	return datacodec.Decode(mediaType, obj, data)
+	return datacodec.Decode(context.Background(), mediaType, obj, data)
 }
