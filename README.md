@@ -1,4 +1,4 @@
-# kcm
+# kcm 
 
 Simple Knative service that scores the sentiment of Cloud Events content. The posted event has to have either `text/plain` or `application/json` content type.
 
